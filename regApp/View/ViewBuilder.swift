@@ -41,6 +41,29 @@ class ViewBuilder {
         return button
     }()
     
+    lazy var signButton: UIButton = {
+        let button = UIButton(primaryAction: UIAction(handler: { _ in
+            print("Sign")
+        }))
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.backgroundColor = .appYellow
+        button.setTitle("Log In", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 15
+        
+        return button
+    }()
+    
+    lazy var orText: UILabel = {
+        let label = UILabel()
+        label.text = "Or"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     func createInputView(textField: UITextField, placeholder: String, isPassword: Bool = false) -> UIStackView {
         

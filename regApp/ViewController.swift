@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     private let passwordTextField = UITextField()
     private var passwordStack = UIStackView()
     private var forgotButton = UIButton()
+    private var signInButton = UIButton()
+    private var orTitle = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,8 @@ class ViewController: UIViewController {
         setContentView()
         setEmailTextView()
         setForgotButton()
+        setSignInButton()
+        setOrlabel()
     }
 
     private func setBannerImage() {
@@ -76,5 +80,25 @@ class ViewController: UIViewController {
         ])
     }
 
+    private func setSignInButton() {
+        signInButton = builder.signButton
+        contentView.addSubview(signInButton)
+        
+        NSLayoutConstraint.activate([
+            signInButton.topAnchor.constraint(equalTo: forgotButton.bottomAnchor, constant: 30),
+            signInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
+            signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
+        ])
+    }
+    
+    private func setOrlabel() {
+        orTitle = builder.orText
+        contentView.addSubview(orTitle)
+        
+        NSLayoutConstraint.activate([
+            orTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            orTitle.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 30)
+        ])
+    }
 }
 
