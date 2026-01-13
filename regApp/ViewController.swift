@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     private let builder = ViewBuilder.shared
     private var contentView = UIView()
     private let emailTextField = UITextField()
+    private let passwordTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +47,19 @@ class ViewController: UIViewController {
     }
     
     private func setEmailTextView() {
-        let emailStack = builder.createInputView(textField: emailTextField, placeholder: "Email")
+        let emailStack = builder.createInputView(textField: emailTextField, placeholder: "Email Adress")
+        let passwordStack = builder.createInputView(textField: passwordTextField, placeholder: "Password")
         contentView.addSubview(emailStack)
+        contentView.addSubview(passwordStack)
         
         NSLayoutConstraint.activate([
             emailStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
             emailStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
             emailStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
+            
+            passwordStack.topAnchor.constraint(equalTo: emailStack.bottomAnchor, constant: 20),
+            passwordStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
+            passwordStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
         ])
     }
 
