@@ -65,6 +65,31 @@ class ViewBuilder {
         return label
     }()
     
+    lazy var signUpStack: UIStackView = {
+        let stack = UIStackView()
+        
+        let text = UILabel()
+        text.text = "Don't have an account?"
+        text.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        
+        let button = UIButton(primaryAction: UIAction(handler: { _ in
+            print("Sign Up")
+        }))
+        button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        button.setTitleColor(.appYellow, for: .normal)
+        
+        stack.axis = .horizontal
+        stack.spacing = 3
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        stack.addArrangedSubview(text)
+        stack.addArrangedSubview(button)
+        
+        return stack
+    }()
+    
     func createInputView(textField: UITextField, placeholder: String, isPassword: Bool = false) -> UIStackView {
         
         lazy var eyeButton: UIButton = {
@@ -150,4 +175,46 @@ class ViewBuilder {
         return vStack
         
     }
+    
+    func createAuthStack() -> UIStackView {
+        
+        let icons: [UIImage] = [.google, .apple, .facebook]
+        
+        let hStack = UIStackView()
+        
+        hStack.axis = .horizontal
+        hStack.distribution = .equalSpacing
+        hStack.alignment = .center
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        icons.forEach { icon in
+            hStack.addArrangedSubview(createAuthButton(icon: icon))
+        }
+        
+        return hStack
+    }
+    
+    private func createAuthButton(icon: UIImage) -> UIButton {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.backgroundColor = .appGray
+        button.layer.cornerRadius = 15
+        
+        button.setImage(icon.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        button.contentHorizontalAlignment = .center
+        button.contentVerticalAlignment = .center
+        button.imageView?.contentMode = .scaleAspectFit
+        
+        button.imageEdgeInsets = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
+        
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 60),
+            button.heightAnchor.constraint(equalToConstant: 60)
+        ])
+        
+        return button
+    }
+    
 }

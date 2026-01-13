@@ -16,7 +16,9 @@ class ViewController: UIViewController {
     private var passwordStack = UIStackView()
     private var forgotButton = UIButton()
     private var signInButton = UIButton()
-    private var orTitle = UILabel()
+    private var orText = UILabel()
+    private var buttonsStack = UIStackView()
+    private var signUpStack = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +29,12 @@ class ViewController: UIViewController {
         setContentView()
         setEmailTextView()
         setForgotButton()
+        
         setSignInButton()
         setOrlabel()
+        
+        setAuthButtons()
+        setSugnUpStack()
     }
 
     private func setBannerImage() {
@@ -49,7 +55,6 @@ class ViewController: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 500)
         ])
     }
     
@@ -92,12 +97,34 @@ class ViewController: UIViewController {
     }
     
     private func setOrlabel() {
-        orTitle = builder.orText
-        contentView.addSubview(orTitle)
+        orText = builder.orText
+        contentView.addSubview(orText)
         
         NSLayoutConstraint.activate([
-            orTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            orTitle.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 30)
+            orText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            orText.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 30)
+        ])
+    }
+    
+    private func setAuthButtons() {
+        buttonsStack = builder.createAuthStack()
+        contentView.addSubview(buttonsStack)
+        
+        NSLayoutConstraint.activate([
+            buttonsStack.topAnchor.constraint(equalTo: orText.bottomAnchor, constant: 30),
+            buttonsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 80),
+            buttonsStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -80),
+        ])
+    }
+    
+    private func setSugnUpStack() {
+        signUpStack = builder.signUpStack
+        contentView.addSubview(signUpStack)
+        
+        NSLayoutConstraint.activate([
+            signUpStack.topAnchor.constraint(equalTo: buttonsStack.bottomAnchor, constant: 30),
+            signUpStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signUpStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
         ])
     }
 }
