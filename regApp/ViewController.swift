@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     private var contentView = UIView()
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
+    private var passwordStack = UIStackView()
+    private var forgotButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class ViewController: UIViewController {
         setBannerImage()
         setContentView()
         setEmailTextView()
+        setForgotButton()
     }
 
     private func setBannerImage() {
@@ -48,7 +51,7 @@ class ViewController: UIViewController {
     
     private func setEmailTextView() {
         let emailStack = builder.createInputView(textField: emailTextField, placeholder: "Email Adress")
-        let passwordStack = builder.createInputView(textField: passwordTextField, placeholder: "Password", isPassword: true)
+        passwordStack = builder.createInputView(textField: passwordTextField, placeholder: "Password", isPassword: true)
         contentView.addSubview(emailStack)
         contentView.addSubview(passwordStack)
         
@@ -60,6 +63,16 @@ class ViewController: UIViewController {
             passwordStack.topAnchor.constraint(equalTo: emailStack.bottomAnchor , constant: 20),
             passwordStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
             passwordStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
+        ])
+    }
+    
+    private func setForgotButton() {
+        forgotButton = builder.forgotPasswordButton
+        contentView.addSubview(forgotButton)
+        
+        NSLayoutConstraint.activate([
+            forgotButton.topAnchor.constraint(equalTo:  passwordStack.bottomAnchor, constant: 7),
+            forgotButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34)
         ])
     }
 

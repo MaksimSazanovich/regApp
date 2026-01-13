@@ -30,6 +30,16 @@ class ViewBuilder {
         return view
     }()
     
+    lazy var forgotPasswordButton: UIButton = {
+        let button = UIButton(primaryAction: UIAction(handler: { _ in
+            print("Forgot Password?")
+        }))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Forgot Password?", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
     
     
     func createInputView(textField: UITextField, placeholder: String, isPassword: Bool = false) -> UIStackView {
