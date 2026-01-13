@@ -30,7 +30,28 @@ class ViewBuilder {
         return view
     }()
     
+    
+    
     func createInputView(textField: UITextField, placeholder: String, isPassword: Bool = false) -> UIStackView {
+        
+        lazy var eyeButton: UIButton = {
+            let button = UIButton(primaryAction: eyeButtonAction)
+            button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.tintColor = .black
+            return button
+        }()
+        
+        lazy var eyeButtonAction = UIAction { _ in
+            textField.isSecureTextEntry.toggle()
+            
+            if textField.isSecureTextEntry {
+                eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            }
+            else {
+                eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            }
+        }
         
         lazy var textView: UIView = {
             
@@ -49,11 +70,12 @@ class ViewBuilder {
             return view
         }()
         
-        lazy var fieldView: UIView = {
+        lazy var fieldView:  UIView = {
             
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
             textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.isSecureTextEntry = isPassword
             view.addSubview(textField)
             
             view.backgroundColor = .appGray
@@ -66,6 +88,15 @@ class ViewBuilder {
                 textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
                 textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             ])
+            
+            if isPassword {
+                view.addSubview(eyeButton)
+                
+                NSLayoutConstraint.activate([
+                    eyeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    eyeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+                ])
+            }
 
             return view
         }()

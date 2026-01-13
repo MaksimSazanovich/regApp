@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     
     private func setEmailTextView() {
         let emailStack = builder.createInputView(textField: emailTextField, placeholder: "Email Adress")
-        let passwordStack = builder.createInputView(textField: passwordTextField, placeholder: "Password")
+        let passwordStack = builder.createInputView(textField: passwordTextField, placeholder: "Password", isPassword: true)
         contentView.addSubview(emailStack)
         contentView.addSubview(passwordStack)
         
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             emailStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
             emailStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
             
-            passwordStack.topAnchor.constraint(equalTo: emailStack.bottomAnchor, constant: 20),
+            passwordStack.topAnchor.constraint(equalTo: emailStack.bottomAnchor , constant: 20),
             passwordStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 34),
             passwordStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -34),
         ])
