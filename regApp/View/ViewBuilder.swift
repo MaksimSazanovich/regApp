@@ -1,0 +1,89 @@
+//
+//  ViewBuilder.swift
+//  regApp
+//
+//  Created by Maksim on 13.01.26.
+//
+
+import UIKit
+
+class ViewBuilder {
+    
+    static let shared = ViewBuilder()
+    private init() {}
+    
+    lazy var bannerImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.widthAnchor.constraint(equalToConstant: 178).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 178).isActive = true
+        image.image = .baner
+        return image
+    }()
+    
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 50
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        return view
+    }()
+    
+    func createInputView(textField: UITextField, placeholder: String, isPassword: Bool = false) -> UIStackView {
+        
+        lazy var textView: UIView = {
+            
+            let text = UILabel()
+            text.translatesAutoresizingMaskIntoConstraints = false
+            text.text = placeholder
+            text.font = .systemFont(ofSize: 12, weight: .semibold)
+            text.textColor = .gray
+            
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(text)
+            view.heightAnchor.constraint(equalTo: text.heightAnchor).isActive = true
+            text.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19).isActive = true
+            
+            return view
+        }()
+        
+        lazy var fieldView: UIView = {
+            
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(textField)
+            
+            view.backgroundColor = .appGray
+            view.layer.cornerRadius = 15
+            
+            NSLayoutConstraint.activate([
+                textField.topAnchor.constraint(equalTo: view.topAnchor),
+                textField.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                textField.heightAnchor.constraint(equalToConstant: 50),
+                textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+                textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            ])
+
+            return view
+        }()
+        
+        lazy var vStack: UIStackView = {
+            
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.spacing = 7
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            
+            stack.addArrangedSubview(textView)
+            stack.addArrangedSubview(fieldView)
+            return stack
+        }()
+       
+        
+        return vStack
+        
+    }
+}
